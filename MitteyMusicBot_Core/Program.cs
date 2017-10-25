@@ -1,12 +1,22 @@
 ﻿using System;
+using System.Threading.Tasks;
+using Telegram.Bot;
 
 namespace MitteyMusicBot_Core
 {
-    class Program
+    internal static class Program
     {
-        static void Main(string[] args)
+        private static async Task TestApiAsync()
         {
-            Console.WriteLine("Hello World!");
+            var botClient = new TelegramBotClient("MYSECRETAPIKEY");
+            var me = await botClient.GetMeAsync();
+            Console.WriteLine($"Hello, {me.FirstName}");
+        }
+
+        private static void Main(string[] args)
+        {
+            TestApiAsync().GetAwaiter().GetResult();
+            Console.ReadLine();
         }
     }
 }
